@@ -23,8 +23,22 @@ public class MappingsApplication {
 //            findInstructor(appDAO);
 //            deleteInstructor(appDAO);
 //            findInstructorDetail(appDAO);
-            deleteInstructorDetail(appDAO);
+//            deleteInstructorDetail(appDAO);
+            createInstructorWithCourses(appDAO);
         };
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+        Instructor tempInstructor = new Instructor("Susa", "Public", "madhususan.public@luv2code.com");
+        InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.youtube.com", "Video Games");
+
+        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+        System.out.println("🚀 tempInstructor = " + tempInstructor);
+        System.out.println("🚜 tempInstructorDetail = " + tempInstructorDetail);
+
+        appDAO.save(tempInstructor);
+        System.out.println("Done!");
     }
 
     private void deleteInstructorDetail(AppDAO appDAO) {
