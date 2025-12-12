@@ -1,6 +1,7 @@
 package com.jpa.mappings;
 
 import com.jpa.mappings.dao.AppDAO;
+import com.jpa.mappings.entity.Course;
 import com.jpa.mappings.entity.Instructor;
 import com.jpa.mappings.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -34,10 +35,16 @@ public class MappingsApplication {
 
         tempInstructor.setInstructorDetail(tempInstructorDetail);
 
-        System.out.println("🚀 tempInstructor = " + tempInstructor);
-        System.out.println("🚜 tempInstructorDetail = " + tempInstructorDetail);
+        Course tempCourse1 = new Course("Air Guitar - The Ultimate Guide");
+        Course tempCourse2 = new Course("The Pinball Masterclass");
 
+        tempInstructor.add(tempCourse1);
+        tempInstructor.add(tempCourse2);
+
+        System.out.println("Saving instructor: " + tempInstructor);
+        System.out.println("The courses: " + tempInstructor.getCourses());
         appDAO.save(tempInstructor);
+
         System.out.println("Done!");
     }
 
