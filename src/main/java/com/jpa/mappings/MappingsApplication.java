@@ -29,8 +29,19 @@ public class MappingsApplication {
 //            deleteInstructorDetail(appDAO);
 //            createInstructorWithCourses(appDAO);
 //            findInstructorWithCourses(appDAO);
-            findCoursesForInstructor(appDAO);
+//            findCoursesForInstructor(appDAO);
+            findInstructorWithCoursesJoinFetch(appDAO);
         };
+    }
+
+    private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Finding Instructor ID = " + theId);
+
+        Instructor tempInstructor = appDAO.findInstructorByIdJoinFetch(theId);
+        System.out.println("tempInstructor = " + tempInstructor);
+        System.out.println("Associated Courses tempInstructor.getCourses() = " + tempInstructor.getCourses());
+        System.out.println("Done!");
     }
 
     private void findCoursesForInstructor(AppDAO appDAO) {
