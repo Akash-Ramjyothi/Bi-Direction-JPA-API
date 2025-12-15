@@ -4,6 +4,7 @@ import com.jpa.mappings.dao.AppDAO;
 import com.jpa.mappings.entity.Course;
 import com.jpa.mappings.entity.Instructor;
 import com.jpa.mappings.entity.InstructorDetail;
+import com.jpa.mappings.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,8 +23,23 @@ public class MappingsApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
         return runner -> {
-
+            createCourseAndReviews(appDAO);
         };
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+        Course tempCourse = new Course("Pacman - How To Score One Million Points");
+
+        tempCourse.addReview(new Review("Great course ... loved it!"));
+        tempCourse.addReview(new Review("Cool course, job well done."));
+        tempCourse.addReview(new Review("What a dumb course, you are an idiot!"));
+        
+        System.out.println("Saving the Course");
+        System.out.println("tempCourse = " + tempCourse);
+        System.out.println("tempCourse.getReviews() = " + tempCourse.getReviews());
+
+        appDAO.save(tempCourse);
+        System.out.println("Done!");
     }
 
     private void deleteCourse(AppDAO appDAO) {
