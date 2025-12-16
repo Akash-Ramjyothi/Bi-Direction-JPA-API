@@ -23,9 +23,6 @@ public class MappingsApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
         return runner -> {
-//            createCourseAndReviews(appDAO);
-//            retrieveCourseAndReviews(appDAO);
-            deleteCourseAndReviews(appDAO);
         };
     }
 
