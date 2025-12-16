@@ -24,8 +24,17 @@ public class MappingsApplication {
 
         return runner -> {
 //            createCourseAndReviews(appDAO);
-            retrieveCourseAndReviews(appDAO);
+//            retrieveCourseAndReviews(appDAO);
+            deleteCourseAndReviews(appDAO);
         };
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+        int theId=10;
+        System.out.println("Deleting Course ID: " + theId);
+
+        appDAO.deleteCourseById(theId);
+        System.out.println("Done!");
     }
 
     private void retrieveCourseAndReviews(AppDAO appDAO) {
