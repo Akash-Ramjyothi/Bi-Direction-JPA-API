@@ -1,10 +1,7 @@
 package com.jpa.mappings;
 
 import com.jpa.mappings.dao.AppDAO;
-import com.jpa.mappings.entity.Course;
-import com.jpa.mappings.entity.Instructor;
-import com.jpa.mappings.entity.InstructorDetail;
-import com.jpa.mappings.entity.Review;
+import com.jpa.mappings.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +20,24 @@ public class MappingsApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
         return runner -> {
+            createCourseAndStudents(appDAO);
         };
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+        Course tempCourse = new Course("Pacman - How To Score One Million Points");
+
+        Student tempStudent1 = new Student("John","Doe","john@luv2code.com");
+        Student tempStudent2 = new Student("Mary","Public","mary@luv2code.com");
+
+        tempCourse.addStudent(tempStudent1);
+        tempCourse.addStudent(tempStudent2);
+
+        System.out.println("Saving the Course: " + tempCourse);
+        System.out.println("Associated Students: " + tempCourse.getStudents());
+
+        appDAO.save(tempCourse);
+        System.out.println("Done!");
     }
 
     private void deleteCourseAndReviews(AppDAO appDAO) {
