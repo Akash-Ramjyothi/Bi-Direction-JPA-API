@@ -22,8 +22,26 @@ public class MappingsApplication {
         return runner -> {
 //            createCourseAndStudents(appDAO);
 //            findCourseAndStudents(appDAO);
-            findStudentAndCourses(appDAO);
+//            findStudentAndCourses(appDAO);
+            addMoreCoursesForStudent(appDAO);
         };
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+        int theId=2;
+        Student tempStudent = appDAO.findStudentAndCourseByStudentId(theId);
+
+        Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
+        Course tempCourse2 = new Course("Atari 2600 - Game Development");
+
+        tempStudent.addCourse(tempCourse1);
+        tempStudent.addCourse(tempCourse2);
+
+        System.out.println("Updating Student: " + tempStudent);
+        System.out.println("Associated Courses: " + tempStudent.getCourses());
+
+        appDAO.update(tempStudent);
+        System.out.println("Done!");
     }
 
     private void findStudentAndCourses(AppDAO appDAO) {
