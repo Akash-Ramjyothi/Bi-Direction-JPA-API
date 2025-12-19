@@ -3,6 +3,7 @@ package com.jpa.mappings.dao;
 import com.jpa.mappings.entity.Course;
 import com.jpa.mappings.entity.Instructor;
 import com.jpa.mappings.entity.InstructorDetail;
+import com.jpa.mappings.entity.Student;
 
 import java.util.List;
 
@@ -35,4 +36,6 @@ public interface AppDAO {
     Course findCourseAndReviewsByCourseId(int theId);
 
     Course findCourseAndStudentsByCourseId(int theId);
+
+    Student findStudentAndCourseByStudentId(int theId);
 }

@@ -3,6 +3,7 @@ package com.jpa.mappings.dao;
 import com.jpa.mappings.entity.Course;
 import com.jpa.mappings.entity.Instructor;
 import com.jpa.mappings.entity.InstructorDetail;
+import com.jpa.mappings.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,10 +137,24 @@ public class AppDAOImpl implements AppDAO {
                         + "JOIN FETCH c.students "
                         + "where c.id = :data", Course.class
         );
-        query.setParameter("data",theId);
+        query.setParameter("data", theId);
 
         Course course = query.getSingleResult();
 
         return course;
+    }
+
+    @Override
+    public Student findStudentAndCourseByStudentId(int theId) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                "select s from Student s "
+                        + "JOIN FETCH s.courses "
+                        + "where s.id = :data", Student.class
+        );
+        query.setParameter("data", theId);
+
+        Student student = query.getSingleResult();
+
+        return student;
     }
 }
