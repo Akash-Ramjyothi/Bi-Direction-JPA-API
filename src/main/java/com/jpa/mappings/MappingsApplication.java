@@ -20,8 +20,19 @@ public class MappingsApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
         return runner -> {
-            createCourseAndStudents(appDAO);
+//            createCourseAndStudents(appDAO);
+            findCourseAndStudents(appDAO);
         };
+    }
+
+    private void findCourseAndStudents(AppDAO appDAO) {
+        int theId=10;
+        Course tempCourse = appDAO.findCourseAndStudentsByCourseId(theId);
+
+        System.out.println("Loaded Course: " + tempCourse);
+        System.out.println("Students: " + tempCourse.getStudents());
+
+        System.out.println("Done!");
     }
 
     private void createCourseAndStudents(AppDAO appDAO) {
