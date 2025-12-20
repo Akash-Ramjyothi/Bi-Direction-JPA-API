@@ -38,7 +38,7 @@ public class MappingsApplication {
     }
 
     private void addMoreCoursesForStudent(AppDAO appDAO) {
-        in2;
+        int theId=2;
         Student tempStudent = appDAO.findStudentAndCourseByStudentId(theId);
 
         Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
