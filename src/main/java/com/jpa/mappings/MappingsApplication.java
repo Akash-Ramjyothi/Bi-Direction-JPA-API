@@ -24,12 +24,21 @@ public class MappingsApplication {
 //            findCourseAndStudents(appDAO);
 //            findStudentAndCourses(appDAO);
 //            addMoreCoursesForStudent(appDAO);
-            deleteCourse(appDAO);
+//            deleteCourse(appDAO);
+            deleteStudent(appDAO);
         };
     }
 
+    private void deleteStudent(AppDAO appDAO) {
+        int theId = 1;
+        System.out.println("Deleting Student ID: " + theId);
+
+        appDAO.deleteStudentById(theId);
+        System.out.println("Done!");
+    }
+
     private void addMoreCoursesForStudent(AppDAO appDAO) {
-        int theId=2;
+        in2;
         Student tempStudent = appDAO.findStudentAndCourseByStudentId(theId);
 
         Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
@@ -104,7 +113,7 @@ public class MappingsApplication {
         tempCourse.addReview(new Review("Great course ... loved it!"));
         tempCourse.addReview(new Review("Cool course, job well done."));
         tempCourse.addReview(new Review("What a dumb course, you are an idiot!"));
-        
+
         System.out.println("Saving the Course");
         System.out.println("tempCourse = " + tempCourse);
         System.out.println("tempCourse.getReviews() = " + tempCourse.getReviews());
