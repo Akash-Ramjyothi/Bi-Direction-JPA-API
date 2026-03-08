@@ -1,25 +1,91 @@
-HELP.md
+############################################
+# General
+############################################
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+
+############################################
+# Maven
+############################################
 target/
-.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+############################################
+# Java / JVM
+############################################
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+replay_pid*
+
+############################################
+# Spring Boot
+############################################
+HELP.md
+*.pid
+*.seed
+*.pid.lock
+*.out
+
+############################################
+# Environment / Secrets
+############################################
+.env
+.env.*
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+*.keystore
+
+############################################
+# Logs
+############################################
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+############################################
+# IDE - IntelliJ IDEA
+############################################
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+############################################
+# IDE - Eclipse / STS
+############################################
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
+bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+############################################
+# IDE - NetBeans
+############################################
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -29,5 +95,36 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+############################################
+# IDE - VS Code
+############################################
 .vscode/
+.history/
+
+############################################
+# Node (if frontend present)
+############################################
+node_modules/
+dist/
+coverage/
+.npm/
+.eslintcache
+
+############################################
+# OS Files
+############################################
+Desktop.ini
+$RECYCLE.BIN/
+
+############################################
+# Test / Coverage
+############################################
+coverage/
+*.lcov
+test-output/
+
+############################################
+# Docker
+############################################
+docker-compose.override.yml
+*.env.docker
