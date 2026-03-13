@@ -1,7 +1,6 @@
 package com.jpa.mappings.entity;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,29 +8,49 @@ import java.util.List;
 @Table(name = "course")
 public class Course {
 
+    // ======================
+    // Fields
+    // ======================
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false, length = 200)
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    // ======================
+    // Relationships
+    // ======================
+
+    // Many Courses -> One Instructor
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // One Course -> Many Reviews
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JoinColumn(name = "course_id")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    // Many Courses <-> Many Students
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "course_student",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
+
+
+    // ======================
+    // Constructors
+    // ======================
 
     public Course() {
     }
@@ -39,6 +58,10 @@ public class Course {
     public Course(String title) {
         this.title = title;
     }
+
+    // ======================
+    // Getters & Setters
+    // ======================
 
     public int getId() {
         return id;
@@ -48,6 +71,7 @@ public class Course {
         this.id = id;
     }
 
+
     public String getTitle() {
         return title;
     }
@@ -55,6 +79,7 @@ public class Course {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public Instructor getInstructor() {
         return instructor;
@@ -64,6 +89,7 @@ public class Course {
         this.instructor = instructor;
     }
 
+
     public List<Review> getReviews() {
         return reviews;
     }
@@ -72,13 +98,6 @@ public class Course {
         this.reviews = reviews;
     }
 
-    public void addReview(Review theReview){
-        if(reviews==null){
-            reviews = new ArrayList<>();
-        }
-
-        reviews.add(theReview);
-    }
 
     public List<Student> getStudents() {
         return students;
@@ -88,16 +107,35 @@ public class Course {
         this.students = students;
     }
 
-    public void addStudent(Student theStudent){
-        if(students == null){
-            students = new ArrayList<>();
-        }
+    // ======================
+    // Helper Methods
+    // ======================
 
-        students.add(theStudent);
+    public void addReview(Review review) {
+        reviews.add(review);
     }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
+    // ======================
+    // Utility Methods
+    // ======================
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + id + ", title='" + title + '\'' + '}';
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
