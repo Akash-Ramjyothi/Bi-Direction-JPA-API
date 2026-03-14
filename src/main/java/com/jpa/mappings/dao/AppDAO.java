@@ -7,39 +7,118 @@ import com.jpa.mappings.entity.Student;
 
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) interface for managing persistence
+ * operations related to Instructor, InstructorDetail, Course,
+ * and Student entities.
+ *
+ * Defines CRUD operations and specialized fetch queries used
+ * across the application.
+ */
 public interface AppDAO {
 
-    void save(Instructor theInstructor);
+    /* ===============================
+       Instructor Operations
+       =============================== */
 
-    Instructor findInstructorById(int theId);
+    /**
+     * Persist a new Instructor entity.
+     */
+    void save(Instructor instructor);
 
-    void deleteInstructorById(int theId);
+    /**
+     * Find Instructor by primary key.
+     */
+    Instructor findInstructorById(int instructorId);
 
-    InstructorDetail findInstructorDetailById(int theId);
+    /**
+     * Fetch Instructor along with associated courses
+     * and instructor detail using JOIN FETCH.
+     */
+    Instructor findInstructorByIdJoinFetch(int instructorId);
 
-    void deleteInstructorDetailById(int theId);
+    /**
+     * Update an existing Instructor entity.
+     */
+    void update(Instructor instructor);
 
-    List<Course> findCoursesByInstructorId(int theId);
+    /**
+     * Delete Instructor by ID.
+     */
+    void deleteInstructorById(int instructorId);
 
-    Instructor findInstructorByIdJoinFetch(int theId);
 
-    void update(Instructor tempInstructor);
+    /* ===============================
+       InstructorDetail Operations
+       =============================== */
 
-    void update(Course tempCourse);
+    /**
+     * Find InstructorDetail by primary key.
+     */
+    InstructorDetail findInstructorDetailById(int instructorDetailId);
 
-    Course findCourseById(int theId);
+    /**
+     * Delete InstructorDetail by ID.
+     */
+    void deleteInstructorDetailById(int instructorDetailId);
 
-    void deleteCourseById(int theId);
 
-    void save(Course theCourse);
+    /* ===============================
+       Course Operations
+       =============================== */
 
-    Course findCourseAndReviewsByCourseId(int theId);
+    /**
+     * Persist a new Course entity.
+     */
+    void save(Course course);
 
-    Course findCourseAndStudentsByCourseId(int theId);
+    /**
+     * Find Course by ID.
+     */
+    Course findCourseById(int courseId);
 
-    Student findStudentAndCourseByStudentId(int theId);
+    /**
+     * Fetch Course with associated reviews.
+     */
+    Course findCourseAndReviewsByCourseId(int courseId);
 
-    void update(Student tempStudent);
+    /**
+     * Fetch Course with associated students.
+     */
+    Course findCourseAndStudentsByCourseId(int courseId);
 
-    void deleteStudentById(int theId);
+    /**
+     * Update existing Course entity.
+     */
+    void update(Course course);
+
+    /**
+     * Delete Course by ID.
+     */
+    void deleteCourseById(int courseId);
+
+    /**
+     * Retrieve all courses belonging to a specific instructor.
+     */
+    List<Course> findCoursesByInstructorId(int instructorId);
+
+
+    /* ===============================
+       Student Operations
+       =============================== */
+
+    /**
+     * Fetch Student along with enrolled courses.
+     */
+    Student findStudentAndCourseByStudentId(int studentId);
+
+    /**
+     * Update existing Student entity.
+     */
+    void update(Student student);
+
+    /**
+     * Delete Student by ID.
+     */
+    void deleteStudentById(int studentId);
 }
